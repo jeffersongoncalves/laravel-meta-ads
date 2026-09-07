@@ -11,8 +11,17 @@ class LaravelMetaAdsServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('laravel-meta-ads')
-            ->hasConfigFile()
-            ->hasViews()
-            ->hasMigrations();
+            ->hasConfigFile('laravel-meta-ads');
+    }
+
+    public function packageRegistered(): void
+    {
+        $this->app->singleton(LaravelMetaAds::class, fn () => new LaravelMetaAds(
+            config('laravel-meta-ads.access_token'),
+            config('laravel-meta-ads.ad_account_id'),
+            config('laravel-meta-ads.api_version'),
+        ));
+
+        $this->app->alias(LaravelMetaAds::class, 'laravel-meta-ads');
     }
 }

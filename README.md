@@ -1,10 +1,6 @@
-<div class="filament-hidden">
+![Laravel Meta Ads](art/jeffersongoncalves-laravel-meta-ads.png)
 
-<!-- banner: art/jeffersongoncalves-laravel-meta-ads.png (generate via portfolio-banner skill) -->
-
-</div>
-
-# LaravelMetaAds
+# Laravel Meta Ads
 
 Laravel integration for the Meta Ads (Facebook/Instagram Ads) Graph API
 
@@ -16,11 +12,46 @@ You can install the package via composer:
 composer require jeffersongoncalves/laravel-meta-ads
 ```
 
+Publish the config file:
+
+```bash
+php artisan vendor:publish --tag="laravel-meta-ads-config"
+```
+
+Set your credentials in `.env`:
+
+```env
+META_ACCESS_TOKEN=
+META_AD_ACCOUNT_ID=
+META_ADS_API_VERSION=v18.0
+```
+
 ## Usage
 
 ```php
-// TODO
+use Jeffersongoncalves\LaravelMetaAds\Facades\LaravelMetaAds;
+
+LaravelMetaAds::accounts();
+
+LaravelMetaAds::campaigns(); // uses META_AD_ACCOUNT_ID by default
+LaravelMetaAds::campaigns('123456789'); // or pass an ad account id explicitly
+
+LaravelMetaAds::campaignInsights(campaignId: '120099', datePreset: 'last_30d');
+
+LaravelMetaAds::createCampaign(name: 'My Campaign', objective: 'OUTCOME_TRAFFIC', status: 'PAUSED');
+
+LaravelMetaAds::updateCampaignStatus(campaignId: '120099', status: 'ACTIVE');
+
+LaravelMetaAds::adSets();
+
+LaravelMetaAds::ads(adSetId: '120088');
+
+LaravelMetaAds::audiences();
+
+LaravelMetaAds::createLookalikeAudience(sourceId: '120077', country: 'US');
 ```
+
+Every method returns an `Illuminate\Http\Client\Response`, so you can chain `->json()`, `->throw()`, etc.
 
 ## Testing
 

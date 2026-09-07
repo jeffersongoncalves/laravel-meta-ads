@@ -11,6 +11,6 @@ class LaravelMetaAds extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return 'laravel-meta-ads';
+        return \Jeffersongoncalves\LaravelMetaAds\LaravelMetaAds::class;
     }
 }

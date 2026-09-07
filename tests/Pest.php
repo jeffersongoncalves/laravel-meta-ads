@@ -1,3 +1,5 @@
 <?php
 
-uses(Jeffersongoncalves\LaravelMetaAds\Tests\TestCase::class)->in('Feature', 'Unit');
+use Jeffersongoncalves\LaravelMetaAds\Tests\TestCase;
+
+uses(TestCase::class)->in('Feature', 'Unit');
